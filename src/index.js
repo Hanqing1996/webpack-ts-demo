@@ -1,4 +1,14 @@
 let div = document.createElement('div')
-div.innerText = 'hi everyone'
 
 document.body.appendChild(div)
+
+
+import Vue from 'vue'
+import hello from './hello.vue'
+
+Vue.config.productionTip = false
+
+new Vue({
+    el: div,
+    render: h => h(hello),
+})

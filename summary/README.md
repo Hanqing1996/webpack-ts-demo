@@ -34,7 +34,20 @@ npx html-webpack-plugin -D
 ---
 
 #### 支持 vue
+> 首先要安装 vue,然后让 webpack 认识 vue
+1. 安装 vue
+```
+npm install -D vue
+```
+2. 让 webpack 认识 vue
+* 安装所需包
+```
+npm install -D vue-loader vue-template-compiler
+```
+* 配置 webpack.conf.js
+```
 
+```
 
 
 
@@ -75,3 +88,16 @@ module.exports = {
     path: path.resolve(__dirname, 'dist')
   }
 ```
+
+---
+> 不同于 webpack,parcel 遵从"约定大于配置",主要体现在
+1. parcel 没有类似于 webpack 的配置文件。指定入口文件是通过指令实现的
+```
+parcel index.html
+```
+而 webpack 则是先将 entry 文件写入 webpack.config.js,这样在执行以下指令时 webpack 就知道要打包编译哪个文件了
+```
+webpack
+```
+2. parcel 以 html 为入口文件，而 webpack 以 js 为入口文件
+3. parcel 对 vue "开箱即用"，而 webpack 需要配置 webpack.config.js 及安装一系列插件
