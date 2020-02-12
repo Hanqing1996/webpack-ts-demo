@@ -11,3 +11,18 @@
 > 配置 shims-vue.d.ts 声明文件
 * 在 vue 中使用 ts
 > 使用 vue-class-component 即可
+
+
+# start
+```
+npm run start:dev
+```
+# build
+* development environemnt
+```
+npm run build:dev
+```
+* production environemnt
+```
+npm run build
+```
