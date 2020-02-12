@@ -12,14 +12,17 @@ module.exports = {
   },
   module: {
     rules: [
-      {
+      { // 添加tsloader
         test: /\.tsx?$/,
-        use: 'ts-loader',
+        loader: 'ts-loader',
         exclude: /node_modules/,
       },
       {
         test: /\.vue$/,
-        loader: 'vue-loader'
+        loader: 'vue-loader',
+        options: {
+          esModule: true,
+        }
       }
     ]
   },

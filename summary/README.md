@@ -122,6 +122,47 @@ module.exports = {
 ```
 不一定要将 ts 作为入口文件，如果入口文件 index.js 有用到 ts 的地方，webpack 会自动识别并调用。
 
+
+
+
+#### 在 ts 中引用 vue
+* 想要在 ts 中引用某个 vue 组件,需要 shims-vue.d.ts 的配合（叫 xx.d.ts 也行，且该文件必须与要引用的 vue 组件在同一目录下）
+```
+declare module '*.vue' {
+  import Vue from 'vue'
+  export default Vue
+}
+```
+> 比较尴尬的是可能这个类型声明文件也可能报错（moundle not found），那么就说明应该是 ts 对 vue 的支持有问题，应该修改 tsconfig.json（最直接有效的方法是找一个确定能支持 vue 的项目，比如 vue-cli 下的 ts 项目，抄它的 tsconfig.json）
+
+
+#### 在 vue 中使用 ts
+安装  vue-class-component 即可，不必做多余的配置
+```
+npm install -D vue-class-component 
+```
+接下来就可以在组件中使用 ts 了
+```
+<template>
+  <div></div>
+</template>
+
+<script lang="ts">
+let s:string='hi'
+console.log(s)
+import Vue from 'vue'
+import Component from 'vue-class-component'
+
+@Component({
+})
+export default class hello extends Vue {
+  created () {
+  }
+}
+</script>
+```
+
+
 ---
 * 指定 webpack.dev.js 为配置文件
 ```
@@ -170,3 +211,21 @@ webpack
 ```
 2. parcel 以 html 为入口文件，而 webpack 以 js 为入口文件
 3. parcel 对 vue "开箱即用"，而 webpack 需要配置 webpack.config.js 及安装一系列插件
+
+
+
+----
+* vsCode 下直接这么写文件路径可能会报错，因为 sb 的 vscode 会认为这是某个包的路径
+```
+import hello from './components/hello.vue'
+```
+应该写成如下形式
+```
+import hello from '../src/components/hello.vue'
+```
+
+
+
+
+
+

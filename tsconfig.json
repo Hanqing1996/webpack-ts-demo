@@ -1,19 +1,7 @@
-// {
-//   "compilerOptions": {
-//     "outDir": "./dist/",
-//     "noImplicitAny": true,
-//     "module": "es6",
-//     "target": "es5",
-//     "jsx": "react",
-//     "allowJs": true,
-//     "de"
-//   }
-// }
-
 {
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
+    "target": "es5",
+    "module": "es2015",
     "strict": true,
     "jsx": "preserve",
     "importHelpers": true,
@@ -44,5 +32,5 @@
   ],
   "exclude": [
     "node_modules"
-  ]
+  ],
 }
