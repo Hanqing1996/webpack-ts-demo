@@ -4,23 +4,30 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const path = require('path');
 
 module.exports = {
-    mode: 'development',
-    entry: './src/index.js',
-    output: {
-        filename: 'main.js',
-        path: path.resolve(__dirname, 'dist'),
-    },
-    module: {
-        rules: [
-          // ... 其它规则
-          {
-            test: /\.vue$/,
-            loader: 'vue-loader'
-          }
-        ]
+  mode: 'development',
+  entry: './src/index.js',
+  output: {
+    filename: 'main.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
       },
-    plugins: [
-        new HtmlWebpackPlugin(),
-        new VueLoaderPlugin()
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader'
+      }
     ]
+  },
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
+  },
+  plugins: [
+    new HtmlWebpackPlugin(),
+    new VueLoaderPlugin()
+  ]
 };

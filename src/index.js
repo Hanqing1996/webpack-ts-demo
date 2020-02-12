@@ -12,3 +12,6 @@ new Vue({
     el: div,
     render: h => h(hello),
 })
+
+import str from './test.ts'
+console.log(str)

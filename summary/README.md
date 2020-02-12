@@ -46,12 +46,81 @@ npm install -D vue-loader vue-template-compiler
 ```
 * 配置 webpack.conf.js
 ```
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
+module: {
+    rules: [
+      // ... 其它规则
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader'
+      }
+    ]
+  },
+plugins: [
+    new VueLoaderPlugin()
+]
 ```
+---
 
+#### 支持 TypeScript
+1. 安装依赖
+```
+npm install --save-dev typescript ts-loader
+```
+2. 添加 tsconfig.json 及 ts 文件
+```
+  webpack-demo
+  |- package.json
++ |- tsconfig.json
+  |- webpack.config.js
+  |- /dist
+    |- bundle.js
+    |- index.html
+  |- /src
+    |- index.js
++   |- index.ts
+  |- /node_modules
+```
+3. 配置 tsconfig.json
+```
+{
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "noImplicitAny": true,
+    "module": "es6",
+    "target": "es5",
+    "jsx": "react",
+    "allowJs": true
+  }
+}
+```
+4. 配置 webpack.config.js
+> 主要是让 webpack 认识 ts 以及将 index.ts 设置为入口文件
+```
+const path = require('path');
 
-
-
+module.exports = {
+  entry: './src/index.ts',
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
+    ],
+  },
+  resolve: {
+    extensions: [ '.tsx', '.ts', '.js' ],
+  },
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+};
+```
+不一定要将 ts 作为入口文件，如果入口文件 index.js 有用到 ts 的地方，webpack 会自动识别并调用。
 
 ---
 * 指定 webpack.dev.js 为配置文件
