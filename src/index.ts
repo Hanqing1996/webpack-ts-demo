@@ -4,7 +4,7 @@ document.body.appendChild(div)
 
 
 import Vue from 'vue'
-import hello from './hello.vue'
+import hello from '../src/components/hello.vue'
 
 Vue.config.productionTip = false
 
@@ -13,5 +13,5 @@ new Vue({
     render: h => h(hello),
 })
 
-import str from './test.ts'
+import str from './test'
 console.log(str)
